@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionRequest {
-
+    private String adminId;
     private String quizId;
     private String questionText;
     final private String[] options = new String[4];

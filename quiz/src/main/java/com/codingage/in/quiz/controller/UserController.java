@@ -32,13 +32,13 @@ public class UserController {
 
     @GetMapping("/getAdminByUserId")
     public ApiResponse<User> getAdminByUserId(@RequestParam String userId) {
-        User user = userService.getAdminByUserId(userId);
+        User user = userService.getAdminByAdminId(userId);
         return new ApiResponse<>(user,HttpStatus.OK);
     }
 
     @GetMapping("/getStudentByUserId")
     public ApiResponse<User> getStudentByUserId(String userId) {
-        User user = userService.getAdminByUserId(userId);
+        User user = userService.getAdminByAdminId(userId);
         return new ApiResponse<>(user,HttpStatus.OK);
     }
 

@@ -6,6 +6,8 @@ import com.codingage.in.quiz.model.request.QuestionRequest;
 import com.codingage.in.quiz.model.request.UpdateQuestion;
 import com.codingage.in.quiz.repository.QuestionRepository;
 import com.codingage.in.quiz.service.QuestionService;
+import com.codingage.in.quiz.service.QuizService;
+import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,15 +15,15 @@ import java.util.Optional;
 
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
-    QuizServiceImpl quizService;
+    QuizService quizService;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
     @Autowired
     QuestionRepository questionRepository;
 
     @Override
-    public Question createQuestion(String userId, QuestionRequest questionRequest) {
-        userService.getAdminByUserId(userId);
+    public Question createQuestion(QuestionRequest questionRequest) {
+        userService.getAdminByAdminId(questionRequest.getAdminId());
         Question question = new Question();
         question.setQuestionText(questionRequest.getQuestionText());
         question.setQuizId(questionRequest.getQuizId());
@@ -34,8 +36,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question updateQuestion(String userId, UpdateQuestion updateQuestion) {
-        userService.getAdminByUserId(userId);
+    public Question updateQuestion( UpdateQuestion updateQuestion) {
+        userService.getAdminByAdminId(updateQuestion.getAdminId());
         Optional<Question> question = questionRepository.findById(updateQuestion.getId());
         if (question.isPresent()) {
             Question question1 = question.get();

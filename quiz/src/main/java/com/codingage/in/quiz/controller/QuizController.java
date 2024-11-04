@@ -17,16 +17,16 @@ public class QuizController {
     @Autowired
     QuizService quizService;
     @PostMapping("/createQuiz")
-    public ApiResponse<Quiz> createQuiz(String userId, CreateQuiz createQuiz)
+    public ApiResponse<Quiz> createQuiz( CreateQuiz createQuiz)
     {
-        Quiz quiz=quizService.createQuiz(userId,createQuiz);
+        Quiz quiz=quizService.createQuiz(createQuiz);
         return new ApiResponse<>(quiz,HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/updateQuiz")
     public ApiResponse<Quiz>  updateQuiz(String userId, UpdateQuiz updateQuiz)
     {
-        Quiz quiz=quizService.updateQuiz(userId,updateQuiz);
+        Quiz quiz=quizService.updateQuiz(updateQuiz);
         return new ApiResponse<>(quiz,HttpStatus.OK);
     }
     @GetMapping("/getQuizById")

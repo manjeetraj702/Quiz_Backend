@@ -12,6 +12,7 @@ import java.sql.Time;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateQuiz {
+    private String adminId;
     private String id;
     private String description;
     private Time duration;

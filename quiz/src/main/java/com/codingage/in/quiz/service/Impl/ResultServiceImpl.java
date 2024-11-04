@@ -4,7 +4,9 @@ import com.codingage.in.quiz.exception.QuizException;
 import com.codingage.in.quiz.model.Result;
 import com.codingage.in.quiz.model.request.CreateResult;
 import com.codingage.in.quiz.repository.ResultRepository;
+import com.codingage.in.quiz.service.QuizService;
 import com.codingage.in.quiz.service.ResultService;
+import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,9 +16,9 @@ public class ResultServiceImpl implements ResultService {
     @Autowired
     ResultRepository repository;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
     @Autowired
-    QuizServiceImpl quizService;
+    QuizService quizService;
 
     @Override
     public Result createResult(CreateResult createResult) {

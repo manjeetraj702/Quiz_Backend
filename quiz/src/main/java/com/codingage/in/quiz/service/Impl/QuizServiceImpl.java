@@ -6,6 +6,7 @@ import com.codingage.in.quiz.model.request.CreateQuiz;
 import com.codingage.in.quiz.model.request.UpdateQuiz;
 import com.codingage.in.quiz.repository.QuizRepository;
 import com.codingage.in.quiz.service.QuizService;
+import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,13 @@ import java.util.Optional;
 public class QuizServiceImpl implements QuizService {
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
     @Autowired
     QuizRepository quizRepository;
 
     @Override
-    public Quiz createQuiz(String userId, CreateQuiz createQuiz) {
-        userService.getAdminByUserId(userId);
+    public Quiz createQuiz( CreateQuiz createQuiz) {
+        userService.getAdminByAdminId(createQuiz.getAdminId());
         Quiz quiz = new Quiz();
         quiz.setDuration(createQuiz.getDuration());
         quiz.setDescription(createQuiz.getDescription());
@@ -30,8 +31,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Quiz updateQuiz(String userId, UpdateQuiz updateQuiz) {
-      userService.getAdminByUserId(userId);
+    public Quiz updateQuiz( UpdateQuiz updateQuiz) {
+      userService.getAdminByAdminId(updateQuiz.getAdminId());
         Optional<Quiz> existingQuizOptional = quizRepository.findById(updateQuiz.getId());
         if (existingQuizOptional.isPresent()) {
             Quiz existingQuiz = existingQuizOptional.get();
@@ -47,7 +48,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Quiz getQuizById(String userId, String quizId) {
-        userService.getAdminByUserId(userId);
+        userService.getAdminByAdminId(userId);
         Optional<Quiz> existingQuizOptional = quizRepository.findById(quizId);
         if (existingQuizOptional.isPresent()) {
 
@@ -69,7 +70,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Boolean deleteQuiz(String userId, String quizId) {
-        userService.getAdminByUserId(userId);
+        userService.getAdminByAdminId(userId);
         Optional<Quiz> quiz = quizRepository.findById(quizId);
         if (quiz.isPresent()) {
             return true;

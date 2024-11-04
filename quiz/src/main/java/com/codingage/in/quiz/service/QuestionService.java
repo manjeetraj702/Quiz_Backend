@@ -7,9 +7,9 @@ import com.codingage.in.quiz.model.request.UpdateQuestion;
 import java.util.List;
 
 public interface QuestionService {
-    Question createQuestion(String userId, QuestionRequest questionRequest);
+    Question createQuestion( QuestionRequest questionRequest);
 
-    Question updateQuestion(String userId, UpdateQuestion updateQuestion);
+    Question updateQuestion( UpdateQuestion updateQuestion);
 
     List<Question> getQuestionsByQuizId(String quizId);
 

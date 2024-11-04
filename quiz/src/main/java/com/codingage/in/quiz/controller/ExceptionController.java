@@ -1,6 +1,6 @@
 package com.codingage.in.quiz.controller;
-import assignMate.example.AssignMate.Exception.ApplicationException;
 import com.codingage.in.quiz.base.ApiResponse;
+import com.codingage.in.quiz.exception.QuizException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,14 +20,15 @@ public class ExceptionController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(ApplicationException.class)
-    public ApiResponse<Object> applicationExceptionHandler(ApplicationException e){
+    @ExceptionHandler(QuizException.class)
+    public ApiResponse<Object> applicationExceptionHandler(QuizException e){
         ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK);
         response.setResponseStatus(HttpStatus.OK);
         response.setErrorMessage(e.getMessage());
         return response;
     }
 
+//    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResponse<Object> badRequestExceptionHandler(Exception e){
         ApiResponse<Object> response = new ApiResponse<>(HttpStatus.OK);

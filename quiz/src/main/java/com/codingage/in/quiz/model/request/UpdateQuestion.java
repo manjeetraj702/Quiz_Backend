@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateQuestion {
+    private String adminId;
     private String id;
     private String quizId;
     private String questionText;

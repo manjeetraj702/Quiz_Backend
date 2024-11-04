@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public interface QuizService {
-    Quiz createQuiz(String userId, CreateQuiz createQuiz);
+    Quiz createQuiz( CreateQuiz createQuiz);
 
-    Quiz updateQuiz(String userId, UpdateQuiz updateQuiz);
+    Quiz updateQuiz( UpdateQuiz updateQuiz);
 
     Quiz getQuizById(String userId, String quizId);
 

@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getAdminByUserId(String userId) {
+    public User getAdminByAdminId(String userId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent())
         {

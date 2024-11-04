@@ -12,7 +12,7 @@ public interface UserService {
 
     User userSignIn(UserSignIn userSignIn);
 
-    User getAdminByUserId(String userId);
+    User getAdminByAdminId(String userId);
     User getStudentByUserId(String userId);
 
     List<User> getAllUsers();
