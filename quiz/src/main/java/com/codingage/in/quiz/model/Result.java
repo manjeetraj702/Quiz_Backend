@@ -16,6 +16,7 @@ public class Result {
     @Id
     private String id;
     private String studentId;
+    private String quizId;
     private int totalQuestions;
     private int totalCorrectQuestions;
 }

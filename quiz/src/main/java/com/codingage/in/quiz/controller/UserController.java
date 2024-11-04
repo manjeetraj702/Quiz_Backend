@@ -7,10 +7,9 @@ import com.codingage.in.quiz.model.request.UserSignUp;
 import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ai/v1/user")
@@ -22,13 +21,31 @@ public class UserController {
     @PostMapping("/signUp")
     public ApiResponse<User> signUp(@RequestBody UserSignUp userSignUp) {
         User createdUser = userService.userSignUp(userSignUp);
-        return new ApiResponse<>(HttpStatus.CREATED, createdUser); // Changed to CREATED
+        return new ApiResponse<>(createdUser,HttpStatus.CREATED);
     }
 
     @PostMapping("/signIn")
     public ApiResponse<User> signIn(@RequestBody UserSignIn userSignIn) {
         User user = userService.userSignIn(userSignIn);
-        return new ApiResponse<>(HttpStatus.OK, user);
+        return new ApiResponse<>(user,HttpStatus.OK);
+    }
+
+    @GetMapping("/getAdminByUserId")
+    public ApiResponse<User> getAdminByUserId(@RequestParam String userId) {
+        User user = userService.getAdminByUserId(userId);
+        return new ApiResponse<>(user,HttpStatus.OK);
+    }
+
+    @GetMapping("/getStudentByUserId")
+    public ApiResponse<User> getStudentByUserId(String userId) {
+        User user = userService.getAdminByUserId(userId);
+        return new ApiResponse<>(user,HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllUsers")
+    public ApiResponse<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return new ApiResponse<>(users,HttpStatus.OK);
     }
 
 

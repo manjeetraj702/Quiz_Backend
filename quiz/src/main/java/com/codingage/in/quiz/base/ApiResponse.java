@@ -6,23 +6,24 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-
-public class ApiResponse <T>{
+public class ApiResponse<T> {
     private T data;
-    private HttpStatus httpStatus;
+    private HttpStatus responseStatus;
     private String errorMessage;
 
-    public ApiResponse(HttpStatus httpStatus, String errorMessage) {
-        this.httpStatus = httpStatus;
+    public ApiResponse(HttpStatus responseStatus) {
+        this.responseStatus = responseStatus;
+    }
+
+    public ApiResponse(HttpStatus responseStatus, String errorMessage) {
+        this.responseStatus = responseStatus;
         this.errorMessage = errorMessage;
     }
 
-    public ApiResponse(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
+    public ApiResponse(T data, HttpStatus responseStatus) {
+        this.data = data;
+        this.responseStatus = responseStatus;
     }
 
-    public ApiResponse(HttpStatus httpStatus, T data) {
-       this.httpStatus=httpStatus;
-        this.data = data;
-    }
 }
+

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ResultService {
     Result createResult(CreateResult createResult);
-    Result getResultByUserIdAndQuizId(String userId,String quizId);
+    Result getResultByUserIdAndQuizId(String userId,String quizId,String resultId);
     List<Result> getResultsByUserId(String userId);
     List<Result> getResultsByQuizId(String quizId);
 }
