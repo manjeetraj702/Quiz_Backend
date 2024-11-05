@@ -8,10 +8,12 @@ import com.codingage.in.quiz.service.QuizService;
 import com.codingage.in.quiz.service.ResultService;
 import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ResultServiceImpl implements ResultService {
     @Autowired
     ResultRepository repository;

@@ -6,15 +6,13 @@ import com.codingage.in.quiz.model.request.CreateResult;
 import com.codingage.in.quiz.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/result")
+@CrossOrigin("*")
 public class ResultController {
     @Autowired
     ResultService service;

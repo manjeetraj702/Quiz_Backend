@@ -13,40 +13,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/Quiz")
+@CrossOrigin("*")
 public class QuizController {
     @Autowired
     QuizService quizService;
+
     @PostMapping("/createQuiz")
-    public ApiResponse<Quiz> createQuiz( CreateQuiz createQuiz)
-    {
-        Quiz quiz=quizService.createQuiz(createQuiz);
-        return new ApiResponse<>(quiz,HttpStatus.ACCEPTED);
+    public ApiResponse<Quiz> createQuiz(CreateQuiz createQuiz) {
+        Quiz quiz = quizService.createQuiz(createQuiz);
+        return new ApiResponse<>(quiz, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/updateQuiz")
-    public ApiResponse<Quiz>  updateQuiz(String userId, UpdateQuiz updateQuiz)
-    {
-        Quiz quiz=quizService.updateQuiz(updateQuiz);
-        return new ApiResponse<>(quiz,HttpStatus.OK);
+    public ApiResponse<Quiz> updateQuiz(String userId, UpdateQuiz updateQuiz) {
+        Quiz quiz = quizService.updateQuiz(updateQuiz);
+        return new ApiResponse<>(quiz, HttpStatus.OK);
     }
+
     @GetMapping("/getQuizById")
-    public ApiResponse<Quiz>  getQuizById(String userId, String quizId)
-    {
-        Quiz quiz=quizService.getQuizById(userId,quizId);
-        return new ApiResponse<>(quiz,HttpStatus.OK);
+    public ApiResponse<Quiz> getQuizById(String userId, String quizId) {
+        Quiz quiz = quizService.getQuizById(userId, quizId);
+        return new ApiResponse<>(quiz, HttpStatus.OK);
     }
 
-    
-    public ApiResponse<Boolean>  deleteQuiz(String userId, String quizId)
-    {
-        Boolean isDelete=quizService.deleteQuiz(userId,quizId);
-        return new ApiResponse<>(isDelete,HttpStatus.OK);
+
+    public ApiResponse<Boolean> deleteQuiz(String userId, String quizId) {
+        Boolean isDelete = quizService.deleteQuiz(userId, quizId);
+        return new ApiResponse<>(isDelete, HttpStatus.OK);
     }
 
-    public ApiResponse<List<Quiz>>  getAllQuiz()
-    {
-        List<Quiz> quizzes=quizService.getAllQuiz();
-        return new ApiResponse<>(quizzes,HttpStatus.OK);
+    public ApiResponse<List<Quiz>> getAllQuiz() {
+        List<Quiz> quizzes = quizService.getAllQuiz();
+        return new ApiResponse<>(quizzes, HttpStatus.OK);
     }
 
 }

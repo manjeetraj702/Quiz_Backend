@@ -13,27 +13,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/question")
+@CrossOrigin("*")
 public class QuestionController {
     @Autowired
     QuestionService questionService;
 
     @PostMapping("/createQuestion")
-    public ApiResponse<Question> createQuestion(QuestionRequest questionRequest){
-        Question question =questionService.createQuestion(questionRequest);
-        return new ApiResponse<>(question,HttpStatus.ACCEPTED);
+    public ApiResponse<Question> createQuestion(QuestionRequest questionRequest) {
+        Question question = questionService.createQuestion(questionRequest);
+        return new ApiResponse<>(question, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/updateQuestion")
-    public ApiResponse<Question> updateQuestion( UpdateQuestion updateQuestion)
-    {
+    public ApiResponse<Question> updateQuestion(UpdateQuestion updateQuestion) {
         Question question = questionService.updateQuestion(updateQuestion);
-        return new ApiResponse<>(question,HttpStatus.OK);
+        return new ApiResponse<>(question, HttpStatus.OK);
     }
 
     @GetMapping("/getQuestionsByQuizId")
-    public ApiResponse<List<Question>> getQuestionsByQuizId(String quizId)
-    {
-        List<Question> questions=questionService.getQuestionsByQuizId(quizId);
-        return new ApiResponse<>(questions,HttpStatus.OK);
+    public ApiResponse<List<Question>> getQuestionsByQuizId(String quizId) {
+        List<Question> questions = questionService.getQuestionsByQuizId(quizId);
+        return new ApiResponse<>(questions, HttpStatus.OK);
     }
 }

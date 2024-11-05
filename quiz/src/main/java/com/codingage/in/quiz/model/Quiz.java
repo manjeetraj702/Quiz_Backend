@@ -17,6 +17,7 @@ import java.sql.Time;
 public class Quiz {
     @Id
     private String id;
+    private String adminId;
     private String description;
     private Time duration;
 }

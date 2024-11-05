@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ai/v1/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -21,31 +22,31 @@ public class UserController {
     @PostMapping("/signUp")
     public ApiResponse<User> signUp(@RequestBody UserSignUp userSignUp) {
         User createdUser = userService.userSignUp(userSignUp);
-        return new ApiResponse<>(createdUser,HttpStatus.CREATED);
+        return new ApiResponse<>(createdUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/signIn")
     public ApiResponse<User> signIn(@RequestBody UserSignIn userSignIn) {
         User user = userService.userSignIn(userSignIn);
-        return new ApiResponse<>(user,HttpStatus.OK);
+        return new ApiResponse<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getAdminByUserId")
     public ApiResponse<User> getAdminByUserId(@RequestParam String userId) {
         User user = userService.getAdminByAdminId(userId);
-        return new ApiResponse<>(user,HttpStatus.OK);
+        return new ApiResponse<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getStudentByUserId")
     public ApiResponse<User> getStudentByUserId(String userId) {
         User user = userService.getAdminByAdminId(userId);
-        return new ApiResponse<>(user,HttpStatus.OK);
+        return new ApiResponse<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getAllUsers")
     public ApiResponse<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return new ApiResponse<>(users,HttpStatus.OK);
+        return new ApiResponse<>(users, HttpStatus.OK);
     }
 
 

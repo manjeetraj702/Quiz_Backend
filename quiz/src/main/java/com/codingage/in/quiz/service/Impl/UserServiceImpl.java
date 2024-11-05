@@ -19,11 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userSignUp(UserSignUp userSignUp) {
-        User user = userRepository.findByUserName(userSignUp.getUserName());
+        User user = userRepository.findByPhoneNumber(userSignUp.getPhoneNumber());
         if (user == null) {
             user = new User();
             user.setUserName(userSignUp.getUserName());
             user.setPassword(userSignUp.getPassword());
+            user.setPhoneNumber(userSignUp.getPhoneNumber());
             user.setRole(userSignUp.getRole());
             return userRepository.save(user);
         }
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userSignIn(UserSignIn userSignIn) {
-        User user = userRepository.findByUserName(userSignIn.getUserName());
+        User user = userRepository.findByPhoneNumber(userSignIn.getPhoneNumber());
         if (user != null && user.getPassword().equals(userSignIn.getPassword())) {
             return user;
         }
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent())
         {
-            if(user.get().getRole().equals("ADMIN"))
+            if(user.get().getRole().equals("admin"))
             {
             return user.get();
             }
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent())
         {
-            if(user.get().getRole().equals("STUDENT"))
+            if(user.get().getRole().equals("student"))
             {
                 return user.get();
             }
