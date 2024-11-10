@@ -4,6 +4,7 @@ import com.codingage.in.quiz.base.ApiResponse;
 import com.codingage.in.quiz.model.Result;
 import com.codingage.in.quiz.model.request.CreateResult;
 import com.codingage.in.quiz.service.ResultService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,25 +19,25 @@ public class ResultController {
     ResultService service;
 
     @PostMapping("/createResult")
-    public ApiResponse<Result> createResult(CreateResult createResult) {
+    public ApiResponse<Result> createResult(@Valid @RequestBody CreateResult createResult) {
         Result result = service.createResult(createResult);
         return new ApiResponse<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping("/getResultByUserIdAndQuizId")
-    public ApiResponse<Result> getResultByUserIdAndQuizId(String userId, String quizId, String resultId) {
+    public ApiResponse<Result> getResultByUserIdAndQuizId(@Valid @RequestParam  String userId, String quizId, String resultId) {
         Result result = service.getResultByUserIdAndQuizId(userId, quizId, resultId);
         return new ApiResponse<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/getResultsByUserId")
-    public ApiResponse<List<Result>> getResultsByUserId(String userId) {
+    public ApiResponse<List<Result>> getResultsByUserId(@Valid @RequestParam String userId) {
         List<Result> results = service.getResultsByUserId(userId);
         return new ApiResponse<>(results, HttpStatus.OK);
     }
 
     @GetMapping("/getResultsByQuizId")
-    public ApiResponse<List<Result>> getResultsByQuizId(String quizId) {
+    public ApiResponse<List<Result>> getResultsByQuizId(@Valid @RequestParam String quizId) {
         List<Result> results = service.getResultsByUserId(quizId);
         return new ApiResponse<>(results, HttpStatus.OK);
     }

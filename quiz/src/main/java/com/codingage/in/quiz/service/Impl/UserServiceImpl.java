@@ -4,6 +4,7 @@ import com.codingage.in.quiz.exception.QuizException;
 import com.codingage.in.quiz.model.User;
 import com.codingage.in.quiz.model.request.UserSignIn;
 import com.codingage.in.quiz.model.request.UserSignUp;
+import com.codingage.in.quiz.model.response.SignInResponse;
 import com.codingage.in.quiz.repository.UserRepository;
 import com.codingage.in.quiz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,14 @@ public class UserServiceImpl implements UserService {
             user.setRole(userSignUp.getRole());
             return userRepository.save(user);
         }
-        throw new QuizException("Username already present");
+        throw new QuizException("phone number already exist");
     }
 
     @Override
-    public User userSignIn(UserSignIn userSignIn) {
+    public SignInResponse userSignIn(UserSignIn userSignIn) {
         User user = userRepository.findByPhoneNumber(userSignIn.getPhoneNumber());
         if (user != null && user.getPassword().equals(userSignIn.getPassword())) {
-            return user;
+            return new SignInResponse(user.getId(),user.getRole());
         }
         throw new QuizException("Credential mismatch");
     }

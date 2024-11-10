@@ -25,7 +25,7 @@ public class QuizServiceImpl implements QuizService {
     public Quiz createQuiz( CreateQuiz createQuiz) {
         userService.getAdminByAdminId(createQuiz.getAdminId());
         Quiz quiz = new Quiz();
-        quiz.setDuration(createQuiz.getDuration());
+        quiz.setDurationInMinutes(createQuiz.getDurationInMinutes());
         quiz.setDescription(createQuiz.getDescription());
         return quizRepository.save(quiz);
     }
@@ -37,7 +37,7 @@ public class QuizServiceImpl implements QuizService {
         if (existingQuizOptional.isPresent()) {
             Quiz existingQuiz = existingQuizOptional.get();
             existingQuiz.setDescription(updateQuiz.getDescription());
-            existingQuiz.setDuration(updateQuiz.getDuration());
+            existingQuiz.setDurationInMinutes(updateQuiz.getDurationInMinutes());
 
             return quizRepository.save(existingQuiz);
         }
@@ -80,6 +80,24 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<Quiz> getAllQuiz() {
+        return quizRepository.findAll();
+    }
+
+    @Override
+    public List<Quiz> getAllActiveQuiz() {
+        List<Quiz> quizzes=quizRepository.findAll();
+        for(int i=0;i<quizzes.size();i++)
+        {
+            if(!quizzes.get(i).isActive())
+            {
+                quizzes.remove(quizzes.get(i));
+            }
+        }
+        return quizzes;
+    }
+
+    @Override
+    public List<Quiz> getAllQuizByUserId(String userId) {
         return quizRepository.findAll();
     }
 }

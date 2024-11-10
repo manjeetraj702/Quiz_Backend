@@ -29,8 +29,10 @@ public class User {
     @Size(min = 6,message = "password size at least 6 character")
     private String password;
 
+    @NotNull
+    @NotBlank
     @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
-    private String phoneNumber;  // Optional field, no @NotNull annotation
+    private String phoneNumber;
 
 
     @Pattern(regexp = "^(student|admin)$", message = "Role must be either 'student' or 'admin'")

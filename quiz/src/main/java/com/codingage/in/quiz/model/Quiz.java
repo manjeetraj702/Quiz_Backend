@@ -1,5 +1,8 @@
 package com.codingage.in.quiz.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +10,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Time;
+import java.time.Duration;
 
 @Getter
 @Setter
@@ -17,7 +20,16 @@ import java.sql.Time;
 public class Quiz {
     @Id
     private String id;
+
+    @NotNull
+    @NotBlank
     private String adminId;
+
+    @NotBlank
     private String description;
-    private Time duration;
+
+    @NotNull
+    @Positive
+    private long durationInMinutes;
+    private boolean active = true;
 }

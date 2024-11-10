@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public interface QuizService {
-    Quiz createQuiz( CreateQuiz createQuiz);
+    Quiz createQuiz(CreateQuiz createQuiz);
 
-    Quiz updateQuiz( UpdateQuiz updateQuiz);
+    Quiz updateQuiz(UpdateQuiz updateQuiz);
 
     Quiz getQuizById(String userId, String quizId);
 
@@ -20,4 +20,8 @@ public interface QuizService {
     Boolean deleteQuiz(String userId, String quizId);
 
     List<Quiz> getAllQuiz();
+
+    List<Quiz> getAllActiveQuiz();
+
+    List<Quiz> getAllQuizByUserId(String userId);
 }
