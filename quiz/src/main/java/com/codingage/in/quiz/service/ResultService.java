@@ -10,4 +10,6 @@ public interface ResultService {
     Result getResultByUserIdAndQuizId(String userId,String quizId,String resultId);
     List<Result> getResultsByUserId(String userId);
     List<Result> getResultsByQuizId(String quizId);
+
+    List<Result> getAllResults();
 }

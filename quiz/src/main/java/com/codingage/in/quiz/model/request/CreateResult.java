@@ -15,6 +15,11 @@ public class CreateResult {
 
     @NotNull
     private String studentId;
+    @NotNull
+    private String questionTitle;
+    @NotNull
+    private String quizId;
+
 
     @Min(0)
     private int totalQuestions;

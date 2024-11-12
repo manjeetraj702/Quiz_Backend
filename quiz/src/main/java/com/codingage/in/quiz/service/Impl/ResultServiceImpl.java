@@ -26,6 +26,7 @@ public class ResultServiceImpl implements ResultService {
     public Result createResult(CreateResult createResult) {
         userService.getStudentByUserId(createResult.getStudentId());
         Result result = new Result();
+        result.setQuestionTitle(createResult.getQuestionTitle());
         result.setStudentId(createResult.getStudentId());
         result.setTotalQuestions(createResult.getTotalQuestions());
         result.setTotalCorrectQuestions(createResult.getTotalCorrectQuestions());
@@ -46,12 +47,17 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public List<Result> getResultsByUserId(String userId) {
         userService.getStudentByUserId(userId);
-        return repository.findByStudentId();
+        return repository.findByStudentId(userId);
     }
 
     @Override
     public List<Result> getResultsByQuizId(String quizId) {
         quizService.getQuizById(quizId);
-        return repository.findByQuizId();
+        return repository.findByQuizId(quizId);
+    }
+
+    @Override
+    public List<Result> getAllResults() {
+        return repository.findAll();
     }
 }

@@ -25,8 +25,10 @@ public class QuizServiceImpl implements QuizService {
     public Quiz createQuiz( CreateQuiz createQuiz) {
         userService.getAdminByAdminId(createQuiz.getAdminId());
         Quiz quiz = new Quiz();
+        quiz.setAdminId(createQuiz.getAdminId());
         quiz.setDurationInMinutes(createQuiz.getDurationInMinutes());
         quiz.setDescription(createQuiz.getDescription());
+        quiz.setTitle(createQuiz.getTitle());
         return quizRepository.save(quiz);
     }
 
@@ -38,11 +40,11 @@ public class QuizServiceImpl implements QuizService {
             Quiz existingQuiz = existingQuizOptional.get();
             existingQuiz.setDescription(updateQuiz.getDescription());
             existingQuiz.setDurationInMinutes(updateQuiz.getDurationInMinutes());
+            existingQuiz.setTitle(updateQuiz.getTitle());
 
             return quizRepository.save(existingQuiz);
         }
             throw new QuizException("Quiz not found");
-
 
     }
 
@@ -99,5 +101,19 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public List<Quiz> getAllQuizByUserId(String userId) {
         return quizRepository.findAll();
+    }
+
+    @Override
+    public Quiz updateQuizStatus(String adminId, String quizId) {
+        userService.getAdminByAdminId(adminId);
+        Optional<Quiz> existingQuizOptional = quizRepository.findById(quizId);
+        if (existingQuizOptional.isPresent()) {
+            Quiz existingQuiz = existingQuizOptional.get();
+            existingQuiz.setActive(!existingQuiz.isActive());
+
+            return quizRepository.save(existingQuiz);
+        }
+        throw new QuizException("Quiz not found");
+
     }
 }

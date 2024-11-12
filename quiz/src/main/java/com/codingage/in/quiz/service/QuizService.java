@@ -24,4 +24,6 @@ public interface QuizService {
     List<Quiz> getAllActiveQuiz();
 
     List<Quiz> getAllQuizByUserId(String userId);
+
+    Quiz updateQuizStatus(String adminId, String quizId);
 }

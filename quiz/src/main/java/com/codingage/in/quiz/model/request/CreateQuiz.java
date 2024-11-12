@@ -19,8 +19,11 @@ public class CreateQuiz {
     @NotBlank
     private String adminId;
 
+
     @NotBlank
     private String description;
+    @NotBlank
+    private String title;
 
     @NotNull
     @Positive

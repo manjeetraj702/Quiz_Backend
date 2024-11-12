@@ -32,8 +32,16 @@ public class QuestionController {
     }
 
     @GetMapping("/getQuestionsByQuizId")
-    public ApiResponse<List<Question>> getQuestionsByQuizId(@Valid @RequestParam  String quizId) {
+    public ApiResponse<List<Question>> getQuestionsByQuizId( @RequestParam  String quizId) {
         List<Question> questions = questionService.getQuestionsByQuizId(quizId);
         return new ApiResponse<>(questions, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteQuestion")
+    public ApiResponse<Boolean> deleteQuestion(String questionId,String adminId)
+    {
+        Boolean check=questionService.deleteQuestion(questionId,adminId);
+
+        return new ApiResponse<>(check, HttpStatus.OK);
     }
 }

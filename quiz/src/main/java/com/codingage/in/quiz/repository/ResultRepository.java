@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ResultRepository extends MongoRepository<Result,String> {
-    List<Result> findByStudentId();
+    List<Result> findByStudentId(String userId);
 
-    List<Result> findByQuizId();
+    List<Result> findByQuizId(String quizId);
 }

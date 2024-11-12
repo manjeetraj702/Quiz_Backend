@@ -26,7 +26,7 @@ public class QuizController {
     }
 
     @PutMapping("/updateQuiz")
-    public ApiResponse<Quiz> updateQuiz(@RequestParam String userId, UpdateQuiz updateQuiz) {
+    public ApiResponse<Quiz> updateQuiz(@RequestParam UpdateQuiz updateQuiz) {
         Quiz quiz = quizService.updateQuiz(updateQuiz);
         return new ApiResponse<>(quiz, HttpStatus.OK);
     }
@@ -59,6 +59,11 @@ public class QuizController {
     public ApiResponse<List<Quiz>> getAllQuizByUserId(@RequestParam String userId) {
         List<Quiz> quizzes = quizService.getAllQuizByUserId(userId);
         return new ApiResponse<>(quizzes, HttpStatus.OK);
+    }
+    @PutMapping("/updateQuizStatus")
+    public ApiResponse<Quiz> updateQuizStatus(@RequestParam String adminId,String quizId) {
+        Quiz quiz = quizService.updateQuizStatus(adminId,quizId);
+        return new ApiResponse<>(quiz, HttpStatus.OK);
     }
 
 }

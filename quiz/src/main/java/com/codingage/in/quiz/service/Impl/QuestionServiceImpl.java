@@ -23,20 +23,17 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     QuestionRepository questionRepository;
 
-    @Override
     public Question createQuestion(QuestionRequest questionRequest) {
         userService.getAdminByAdminId(questionRequest.getAdminId());
+
         Question question = new Question();
         question.setQuestionText(questionRequest.getQuestionText());
         question.setQuizId(questionRequest.getQuizId());
         question.setCorrectOption(questionRequest.getCorrectOption());
-        for (int i = 0; i < 4; i++) {
-            question.getOptions()[i] = questionRequest.getOptions()[i];
-        }
+        question.setOptions(questionRequest.getOptions());  // Directly setting the options list
 
         return questionRepository.save(question);
     }
-
     @Override
     public Question updateQuestion( UpdateQuestion updateQuestion) {
         userService.getAdminByAdminId(updateQuestion.getAdminId());
@@ -45,6 +42,7 @@ public class QuestionServiceImpl implements QuestionService {
             Question question1 = question.get();
             question1.setQuestionText(updateQuestion.getQuestionText());
             question1.setCorrectOption(updateQuestion.getCorrectOption());
+            questionRepository.save(question1);
 
         }
         throw new QuizException("Question is not present");
@@ -53,6 +51,19 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> getQuestionsByQuizId(String quizId) {
         quizService.getQuizById(quizId);
-        return questionRepository.findAllByQuizId();
+        return questionRepository.findAllByQuizId(quizId);
+    }
+
+    @Override
+    public Boolean deleteQuestion(String questionId, String adminId) {
+        userService.getAdminByAdminId(adminId);
+        Optional<Question> question = questionRepository.findById(questionId);
+        if (question.isPresent()) {
+            Question question1 = question.get();
+             questionRepository.delete(question1);
+             return true;
+        }
+        throw new QuizException("Question is not present");
+
     }
 }

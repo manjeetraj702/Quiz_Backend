@@ -22,6 +22,9 @@ public class Result {
     private String studentId;
 
     @NotNull
+    private String questionTitle;
+
+    @NotNull
     private String quizId;
 
     @Min(0)

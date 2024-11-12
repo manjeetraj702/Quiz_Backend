@@ -26,7 +26,9 @@ public class UpdateQuiz {
     @NotNull
     @NotBlank
     private String description;
-
+    @NotNull
+    @NotBlank
+    private String title;
     @NotNull
     @Positive
     private long durationInMinutes;

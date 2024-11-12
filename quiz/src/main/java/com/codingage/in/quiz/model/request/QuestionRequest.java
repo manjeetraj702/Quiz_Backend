@@ -3,11 +3,12 @@ package com.codingage.in.quiz.model.request;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,20 +16,17 @@ import lombok.Setter;
 @NoArgsConstructor
 public class QuestionRequest {
 
-    @NotNull
     @NotBlank
     private String adminId;
 
-    @NotNull
     @NotBlank
     private String quizId;
 
-    @NotNull
     @NotBlank
     private String questionText;
 
-    @NotNull
-    private final String[] options = new String[4];  // Ensures array is initialized with a fixed length
+    @Size(min = 4, max = 4, message = "There must be exactly 4 options")
+    private List<@NotBlank String> options;  // Ensures four non-blank options
 
     @Min(0)
     @Max(3)

@@ -13,4 +13,5 @@ public interface QuestionService {
 
     List<Question> getQuestionsByQuizId(String quizId);
 
+    Boolean deleteQuestion(String questionId, String adminId);
 }

@@ -19,26 +19,31 @@ public class ResultController {
     ResultService service;
 
     @PostMapping("/createResult")
-    public ApiResponse<Result> createResult(@Valid @RequestBody CreateResult createResult) {
+    public ApiResponse<Result> createResult( @RequestBody CreateResult createResult) {
         Result result = service.createResult(createResult);
         return new ApiResponse<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping("/getResultByUserIdAndQuizId")
-    public ApiResponse<Result> getResultByUserIdAndQuizId(@Valid @RequestParam  String userId, String quizId, String resultId) {
+    public ApiResponse<Result> getResultByUserIdAndQuizId( @RequestParam  String userId, String quizId, String resultId) {
         Result result = service.getResultByUserIdAndQuizId(userId, quizId, resultId);
         return new ApiResponse<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/getResultsByUserId")
-    public ApiResponse<List<Result>> getResultsByUserId(@Valid @RequestParam String userId) {
+    public ApiResponse<List<Result>> getResultsByUserId(@RequestParam String userId) {
         List<Result> results = service.getResultsByUserId(userId);
         return new ApiResponse<>(results, HttpStatus.OK);
     }
 
     @GetMapping("/getResultsByQuizId")
-    public ApiResponse<List<Result>> getResultsByQuizId(@Valid @RequestParam String quizId) {
-        List<Result> results = service.getResultsByUserId(quizId);
+    public ApiResponse<List<Result>> getResultsByQuizId(@RequestParam String quizId) {
+        List<Result> results = service.getResultsByQuizId(quizId);
+        return new ApiResponse<>(results, HttpStatus.OK);
+    }
+    @GetMapping("/getAllResults")
+    public ApiResponse<List<Result>> getAllResults( ) {
+        List<Result> results = service.getAllResults();
         return new ApiResponse<>(results, HttpStatus.OK);
     }
 }

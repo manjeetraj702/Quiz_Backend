@@ -27,6 +27,8 @@ public class Quiz {
 
     @NotBlank
     private String description;
+    @NotBlank
+    private String title;
 
     @NotNull
     @Positive
