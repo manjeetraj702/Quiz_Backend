@@ -1,17 +1,7 @@
 schemaVersion: 1.0
-# Component configuration
-components:
-  - name: quiz-service
+# Example endpoint configuration
+endpoints:
+  - name: my-service-endpoint
+    service:
+      port: 8080  # Replace with your actual service port if different
     type: REST
-    provider: wso2
-    description: "Quiz management service"
-    environment: production
-    resources:
-      cpu: "1"           # Number of CPU cores
-      memory: "1Gi"       # Memory allocation for the service
-    endpoints:
-      - name: quiz-endpoint
-        url: "/api/v1/quizzes" # Define the API endpoint for the quizzes
-        method: GET           # Method used for this endpoint (GET, POST, etc.)
-        service:
-          port: 8080          # Port where the service will listen (default for Spring Boot is 8080)
