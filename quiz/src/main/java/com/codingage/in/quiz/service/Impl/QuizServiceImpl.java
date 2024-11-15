@@ -75,6 +75,7 @@ public class QuizServiceImpl implements QuizService {
         userService.getAdminByAdminId(userId);
         Optional<Quiz> quiz = quizRepository.findById(quizId);
         if (quiz.isPresent()) {
+            quizRepository.delete(quiz.get());
             return true;
         }
         throw new QuizException("Quiz not present");
@@ -99,8 +100,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<Quiz> getAllQuizByUserId(String userId) {
-        return quizRepository.findAll();
+    public List<Quiz> getAllQuizByAdminId(String adminId) {
+        return quizRepository.findAllByAdminId(adminId);
     }
 
     @Override
@@ -115,5 +116,34 @@ public class QuizServiceImpl implements QuizService {
         }
         throw new QuizException("Quiz not found");
 
+    }
+
+    @Override
+    public List<Quiz> getAllQuizByActiveAdminId(String adminId) {
+        List<Quiz> quizzes = quizRepository.findAllByAdminId(adminId);
+
+        for(int i=0;i<quizzes.size();i++)
+        {
+            if(!quizzes.get(i).isActive())
+            {
+                quizzes.remove(quizzes.get(i));
+            }
+        }
+        return quizzes;
+
+    }
+
+    @Override
+    public List<Quiz> getAllQuizByInActiveAdminId(String adminId) {
+        List<Quiz> quizzes = quizRepository.findAllByAdminId(adminId);
+
+        for(int i=0;i<quizzes.size();i++)
+        {
+            if(quizzes.get(i).isActive())
+            {
+                quizzes.remove(quizzes.get(i));
+            }
+        }
+        return quizzes;
     }
 }

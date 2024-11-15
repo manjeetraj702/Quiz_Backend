@@ -5,3 +5,4 @@ endpoints:
     service:
       port: 8080  # Replace with your actual service port if different
     type: REST
+ 

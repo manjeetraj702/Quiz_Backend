@@ -23,7 +23,11 @@ public interface QuizService {
 
     List<Quiz> getAllActiveQuiz();
 
-    List<Quiz> getAllQuizByUserId(String userId);
+    List<Quiz> getAllQuizByAdminId(String userId);
 
     Quiz updateQuizStatus(String adminId, String quizId);
+
+    List<Quiz> getAllQuizByActiveAdminId(String adminId);
+
+    List<Quiz> getAllQuizByInActiveAdminId(String adminId);
 }

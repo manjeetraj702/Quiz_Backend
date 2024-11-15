@@ -1,9 +1,6 @@
 package com.codingage.in.quiz.model.request;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,7 @@ public class QuestionRequest {
     @NotBlank
     private String quizId;
 
+    @NotNull
     @NotBlank
     private String questionText;
 

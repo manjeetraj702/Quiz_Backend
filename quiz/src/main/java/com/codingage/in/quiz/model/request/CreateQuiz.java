@@ -20,8 +20,10 @@ public class CreateQuiz {
     private String adminId;
 
 
+    @NotNull
     @NotBlank
     private String description;
+    @NotNull
     @NotBlank
     private String title;
 

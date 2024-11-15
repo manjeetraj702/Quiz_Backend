@@ -27,6 +27,7 @@ public class Question {
     @NotNull
     private String quizId;
 
+    @NotNull
     @NotBlank
     private String questionText;
 

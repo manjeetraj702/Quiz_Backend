@@ -20,7 +20,7 @@ public class QuizController {
     QuizService quizService;
 
     @PostMapping("/createQuiz")
-    public ApiResponse<Quiz> createQuiz(@RequestBody CreateQuiz createQuiz) {
+    public ApiResponse<Quiz> createQuiz( @Valid  @RequestBody CreateQuiz createQuiz) {
         Quiz quiz = quizService.createQuiz(createQuiz);
         return new ApiResponse<>(quiz, HttpStatus.ACCEPTED);
     }
@@ -56,14 +56,26 @@ public class QuizController {
     }
 
     @GetMapping("/getAllQuizByUserId")
-    public ApiResponse<List<Quiz>> getAllQuizByUserId(@RequestParam String userId) {
-        List<Quiz> quizzes = quizService.getAllQuizByUserId(userId);
+    public ApiResponse<List<Quiz>> getAllQuizByUserId(@RequestParam String adminId) {
+        List<Quiz> quizzes = quizService.getAllQuizByAdminId(adminId);
         return new ApiResponse<>(quizzes, HttpStatus.OK);
     }
+
+    @GetMapping("/getAllQuizByActiveAdminId")
+    public ApiResponse<List<Quiz>> getAllQuizByActiveAdminId(@RequestParam String adminId) {
+        List<Quiz> quizzes = quizService.getAllQuizByActiveAdminId(adminId);
+        return new ApiResponse<>(quizzes, HttpStatus.OK);
+    }
+
     @PutMapping("/updateQuizStatus")
-    public ApiResponse<Quiz> updateQuizStatus(@RequestParam String adminId,String quizId) {
-        Quiz quiz = quizService.updateQuizStatus(adminId,quizId);
+    public ApiResponse<Quiz> updateQuizStatus(@RequestParam String adminId, String quizId) {
+        Quiz quiz = quizService.updateQuizStatus(adminId, quizId);
         return new ApiResponse<>(quiz, HttpStatus.OK);
+    }
+    @GetMapping("/getAllQuizByInActiveAdminId")
+    public ApiResponse<List<Quiz>> getAllQuizByInActiveAdminId(@RequestParam String adminId) {
+        List<Quiz> quizzes = quizService.getAllQuizByInActiveAdminId(adminId);
+        return new ApiResponse<>(quizzes, HttpStatus.OK);
     }
 
 }
