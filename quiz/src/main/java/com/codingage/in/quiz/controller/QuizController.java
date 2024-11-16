@@ -38,8 +38,8 @@ public class QuizController {
     }
 
     @DeleteMapping("/deleteQuiz")
-    public ApiResponse<Boolean> deleteQuiz(@RequestParam String userId, String quizId) {
-        Boolean isDelete = quizService.deleteQuiz(userId, quizId);
+    public ApiResponse<Boolean> deleteQuiz(@RequestParam String adminId, String quizId) {
+        Boolean isDelete = quizService.deleteQuiz(adminId, quizId);
         return new ApiResponse<>(isDelete, HttpStatus.OK);
     }
 
@@ -55,8 +55,8 @@ public class QuizController {
         return new ApiResponse<>(quizzes, HttpStatus.OK);
     }
 
-    @GetMapping("/getAllQuizByUserId")
-    public ApiResponse<List<Quiz>> getAllQuizByUserId(@RequestParam String adminId) {
+    @GetMapping("/getAllQuizByAdminId")
+    public ApiResponse<List<Quiz>> getAllQuizByAdminId(@RequestParam String adminId) {
         List<Quiz> quizzes = quizService.getAllQuizByAdminId(adminId);
         return new ApiResponse<>(quizzes, HttpStatus.OK);
     }

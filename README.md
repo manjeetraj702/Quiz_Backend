@@ -22,8 +22,7 @@ This Spring Boot backend enables:
     - View and attempt available quizzes.
     - View results and review answers after submission.
 
-3. **Notifications**:
-    - Optional quiz completion and new quiz notifications.
+
 
 ## Testing
 Use [Swagger UI](http://localhost:8080/swagger-ui.html) for API testing and documentation.

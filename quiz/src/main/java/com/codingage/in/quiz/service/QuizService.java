@@ -17,7 +17,7 @@ public interface QuizService {
 
     Quiz getQuizById(String quizId);
 
-    Boolean deleteQuiz(String userId, String quizId);
+    Boolean deleteQuiz(String adminId, String quizId);
 
     List<Quiz> getAllQuiz();
 

@@ -71,8 +71,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Boolean deleteQuiz(String userId, String quizId) {
-        userService.getAdminByAdminId(userId);
+    public Boolean deleteQuiz(String adminId, String quizId) {
+        userService.getAdminByAdminId(adminId);
         Optional<Quiz> quiz = quizRepository.findById(quizId);
         if (quiz.isPresent()) {
             quizRepository.delete(quiz.get());
